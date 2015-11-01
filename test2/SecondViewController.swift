@@ -15,7 +15,16 @@ class SecondViewController: UIViewController {
     var numbersArray: [Int] = []
     var number:Int = 10
     var lastButtonWasNumber:Bool = false
-    var pandaArray:[UIImage] = []
+    var pandaArray:[UIImage] = [
+        UIImage(named: panda1.jpg),
+        panda2.jpg,
+        panda3.jpg,
+        panda4.jpg,
+        panda5.jpg,
+        panda6.jpg,
+        panda7.jpg
+        panda8.jpg
+    ]
 
     
     //if any of number button clicked, change var number
