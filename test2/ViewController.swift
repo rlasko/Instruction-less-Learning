@@ -15,7 +15,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var PickerViewData: [String] = [String]()
+    var pickerViewData: [String] = [String]()
+    
+    var experiment:String = "Experiment 1"
     
     @IBOutlet weak var subjectID: UITextField!
     
@@ -30,13 +32,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.pickerView.dataSource = self
         
         //Create Picker Array
-        PickerViewData = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"]
+        pickerViewData = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"]
+        
+        //selected experiment number
+        func selectedExperiment(pickerView: UIPickerView!, didSelectRow:String){
+            experiment = didSelectRow
+        }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destView: SecondViewController = segue.destinationViewController as! SecondViewController
+        destView.data = experiment
     }
 
     // The number of columns of data
@@ -46,12 +53,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     // The number of rows of data
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return PickerViewData.count
+        return pickerViewData.count
     }
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return PickerViewData[row]
+        return pickerViewData[row]
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
 }

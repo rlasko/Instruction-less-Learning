@@ -12,20 +12,28 @@ class SecondViewController: UIViewController {
     
     //initiate variables
     var actionsArray:[String] = []
+    var experimentRecieve:String = "Experiment 1"
     var numbersArray: [Int] = []
     var number:Int = 10
     var lastButtonWasNumber:Bool = false
-    var pandaArray:[UIImage] = [
-        UIImage(named: panda1.jpg),
-        panda2.jpg,
-        panda3.jpg,
-        panda4.jpg,
-        panda5.jpg,
-        panda6.jpg,
-        panda7.jpg
-        panda8.jpg
+    var pandaArray = [
+        UIImage(named: "panda1")!,
+        UIImage(named: "panda2")!,
+        UIImage(named: "panda3")!,
+        UIImage(named: "panda4")!,
+        UIImage(named: "panda5")!,
+        UIImage(named: "panda6")!,
+        UIImage(named: "panda7")!,
+        UIImage(named: "panda8")!
     ]
+    var leftFlipArray = []
+    var rightFlipArray = []
+    var leftLeapArray = []
+    var rightLeapArray = []
+    var spinArray = []
+    
 
+    @IBOutlet weak var animationView: UIImageView!
     
     //if any of number button clicked, change var number
     @IBAction func didClickZero(sender: AnyObject) {
@@ -131,11 +139,13 @@ class SecondViewController: UIViewController {
         lastButtonWasNumber = false
     }
 
+
     @IBAction func didClickSpinButton(sender: AnyObject) {
         actionsArray.append("spin")
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
+
     
     //switch determines mystery funct.
     @IBAction func didClickMysteryButton(sender: AnyObject) {
@@ -153,9 +163,20 @@ class SecondViewController: UIViewController {
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
         //display actionArray[element]*numbersArray[element]
+        // need to change type of actionsArray to array
+//        for element in 0...actionsArray.count {
+//            actionsArray[element] = actionsArray[element] * numbersArray[element]
+       // }
+        startAnimating()
 
     }
     
+    func startAnimating() {
+        animationView.animationImages = pandaArray
+        animationView.animationDuration = 3.0
+        self.animationView.animationRepeatCount = 1
+        animationView.startAnimating()
+    }
     
     //Add switch case to run action array
 

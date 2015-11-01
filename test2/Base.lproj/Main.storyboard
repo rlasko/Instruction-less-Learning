@@ -84,7 +84,6 @@
                                 <state key="normal" title="Left Flip"/>
                                 <connections>
                                     <action selector="didClickLeftFlipButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="Gl7-gn-cr0"/>
-                                    <action selector="leftFlipButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="yRb-w4-q5m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ok5-m5-6Bw">
@@ -92,7 +91,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Right Leap"/>
                                 <connections>
-                                    <action selector="didClickLeapButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="pvQ-Di-IX2"/>
                                     <action selector="didClickRightLeapButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="NmM-qa-WKT"/>
                                 </connections>
                             </button>
@@ -109,7 +107,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Spin"/>
                                 <connections>
-                                    <action selector="didClickSpinButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="R5E-FY-7dv"/>
+                                    <action selector="didClickSpinButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="DrW-4V-3ih"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jbz-Rb-jgt">
@@ -229,7 +227,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Gbg-cK-vNO"/>
                     <connections>
-                        <outlet property="didClickSpinButton" destination="eZp-Ng-aWx" id="qIO-fA-mXI"/>
+                        <outlet property="animationView" destination="aLD-7W-RaI" id="FIY-rW-b0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7g-IE-27U" userLabel="First Responder" sceneMemberID="firstResponder"/>
