@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SecondViewController: UIViewController {
     
+    @IBOutlet weak var arrayLabel: UILabel!
+
+    
     //initiate variables
-    var actionsArray:[String] = []
+    var actionsArray = Array<Array<UIImage>>()
     var experimentRecieve:String = "Experiment 1"
     var numbersArray: [Int] = []
     var number:Int = 10
-    var lastButtonWasNumber:Bool = false
+    var lastButtonWasNumber:Bool = true
     var pandaArray = [
         UIImage(named: "panda1")!,
         UIImage(named: "panda2")!,
@@ -26,11 +30,28 @@ class SecondViewController: UIViewController {
         UIImage(named: "panda7")!,
         UIImage(named: "panda8")!
     ]
-    var leftFlipArray = []
-    var rightFlipArray = []
-    var leftLeapArray = []
-    var rightLeapArray = []
-    var spinArray = []
+    var leftFlipArray = [
+        UIImage(named: "leftFlip")!,
+        UIImage(named: "blank")!
+    ]
+    var rightFlipArray = [
+        UIImage(named: "rightFlip")!,
+        UIImage(named: "blank")!
+    ]
+    var leftLeapArray = [
+        UIImage(named: "leftLeap")!,
+        UIImage(named: "blank")!
+    ]
+    var rightLeapArray = [
+        UIImage(named: "rightLeap")!,
+        UIImage(named: "blank")!
+    ]
+    var spinArray = [
+        UIImage(named: "spin")!,
+        UIImage(named: "blank")!
+    ]
+    var playArray:[UIImage] = []
+
     
 
     @IBOutlet weak var animationView: UIImageView!
@@ -68,7 +89,7 @@ class SecondViewController: UIViewController {
     }
     
     @IBAction func didClickFour(sender: AnyObject) {
-        if lastButtonWasNumber == false{
+        if (!lastButtonWasNumber) {
             numbersArray.removeLast()
             numbersArray.append(4)
         }
@@ -116,32 +137,32 @@ class SecondViewController: UIViewController {
     
     //if any action button clicked, change bool
     @IBAction func didClickLeftFlipButton(sender: AnyObject) {
-        actionsArray.append("leftFlip")
+        actionsArray.append(leftFlipArray)
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickRightFlipButton(sender: AnyObject) {
-        actionsArray.append("rightFlip")
+        actionsArray.append(rightFlipArray)
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickLeftLeapButton(sender: AnyObject) {
-        actionsArray.append("leftLeap")
+        actionsArray.append(leftLeapArray)
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickRightLeapButton(sender: AnyObject) {
-        actionsArray.append("rightLeap")
+        actionsArray.append(rightLeapArray)
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
 
 
     @IBAction func didClickSpinButton(sender: AnyObject) {
-        actionsArray.append("spin")
+        actionsArray.append(spinArray)
         numbersArray.append(1)
         lastButtonWasNumber = false
     }
@@ -152,30 +173,46 @@ class SecondViewController: UIViewController {
         for (_,element) in numbersArray.enumerate(){
             numbersArray[element] = numbersArray[element]*2
         }
+        //handles exception - cannot select number after this button
+        lastButtonWasNumber = true
     }
     
     //clear actionsArray
     @IBAction func didClickClear(sender: AnyObject) {
         actionsArray = []
         numbersArray = []
+        
+        //handles exception - sequence must begin with action
+        lastButtonWasNumber = true
     }
     
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
-        //display actionArray[element]*numbersArray[element]
-        // need to change type of actionsArray to array
-//        for element in 0...actionsArray.count {
-//            actionsArray[element] = actionsArray[element] * numbersArray[element]
-       // }
         startAnimating()
+        
+        
+        //handles exception - sequence must begin with action
+        lastButtonWasNumber = true
 
     }
     
     func startAnimating() {
-        animationView.animationImages = pandaArray
-        animationView.animationDuration = 3.0
-        self.animationView.animationRepeatCount = 1
-        animationView.startAnimating()
+        //check that there are valid inputs for both arrays
+        if actionsArray.count >= 1 && actionsArray.count == numbersArray.count {
+            //iterate through actions array, each element is a single action
+            for element in 0...actionsArray.count-1{
+                //play that action the number of times denoted in matching index of numbers array
+                for _ in 0...numbersArray[element]-1{
+                    animationView.animationImages = actionsArray[element]
+                    animationView.animationDuration = 2.0
+                    self.animationView.animationRepeatCount = 1
+                }
+            }
+            animationView.startAnimating()
+        }else{
+            animationView.image = UIImage(named: "panda1")
+            animationView.animationDuration = 1.0
+        }
     }
     
     //Add switch case to run action array

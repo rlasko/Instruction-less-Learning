@@ -222,12 +222,20 @@
                                     <action selector="didClickClear:" destination="st1-jg-CWF" eventType="touchUpInside" id="Uzz-Ig-xiq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Array" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qMn-TG-qeF">
+                                <rect key="frame" x="220" y="972" width="278" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Gbg-cK-vNO"/>
                     <connections>
                         <outlet property="animationView" destination="aLD-7W-RaI" id="FIY-rW-b0R"/>
+                        <outlet property="arrayLabel" destination="qMn-TG-qeF" id="YBW-Lv-JiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7g-IE-27U" userLabel="First Responder" sceneMemberID="firstResponder"/>
