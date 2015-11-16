@@ -51,6 +51,11 @@ class SecondViewController: UIViewController {
         UIImage(named: "blank")!
     ]
     var playArray:[UIImage] = []
+    let timeDuration:Double = 1
+    var repeatAction:Int = 1
+    var currentActionArray:[UIImage] = [
+        UIImage(named: "panda1")!
+    ]
 
     
 
@@ -242,9 +247,9 @@ class SecondViewController: UIViewController {
     }
     
     func imageAnim() {
-        self.animationView.animationImages = self.pandaArray
-        self.animationView.animationDuration = 1
-        self.animationView.animationRepeatCount = 1
+        self.animationView.animationImages = currentActionArray
+        self.animationView.animationDuration = timeDuration * Double(repeatAction)
+        self.animationView.animationRepeatCount = repeatAction
         animationView.startAnimating()
     }
     
@@ -253,7 +258,27 @@ class SecondViewController: UIViewController {
         guard i < actionsArray.count && !actionsArray.isEmpty else {
             return
         }
-        let time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(1) * Int64(NSEC_PER_SEC))
+        let time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(timeDuration * Double(repeatAction)) * Int64(NSEC_PER_SEC))
+        
+        var currentAction:String = actionsArray[i].action
+        repeatAction = actionsArray[i].number
+
+        switch currentAction{
+            
+        case "LF":
+            currentActionArray = leftFlipArray
+        case "RF":
+            currentActionArray = rightFlipArray
+        case "LL":
+            currentActionArray = leftLeapArray
+        case "RL":
+            currentActionArray = rightLeapArray
+        case "S":
+            currentActionArray = spinArray
+        default:
+            animationView.image = UIImage(named: "panda1")
+        
+        }
         
         imageAnim()
         dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
@@ -261,57 +286,42 @@ class SecondViewController: UIViewController {
         }
     }
     
-    func whyIsRaeSuchABae(mutableArray:[(String, Int)]?) {
-        
-        var mutableArr = mutableArray ?? Array(actionsArray)
+
     
-        guard let action =  mutableArr.first else {
-            return
-        }
-
-        animationViewAnimateImages(action.0) { (completed)  in
-            if completed {
-                mutableArr.removeFirst()
-                self.whyIsRaeSuchABae(mutableArr)
-            }
-
-        }
-    }
-    
-    func startAnimating() {
-        
-
-        for (action, number) in actionsArray{
-            switch action{
-                
-            case "LF":
-                animationView.animationImages = leftFlipArray
-                animationView.animationDuration = 2.0
-                self.animationView.animationRepeatCount = number
-            case "RF":
-                animationView.animationImages = rightFlipArray
-                animationView.animationDuration = 2.0
-                self.animationView.animationRepeatCount = number
-            case "LL":
-                animationView.animationImages = leftLeapArray
-                animationView.animationDuration = 2.0
-                self.animationView.animationRepeatCount = number
-            case "RL":
-                animationView.animationImages = rightLeapArray
-                animationView.animationDuration = 2.0
-                self.animationView.animationRepeatCount = number
-            case "S":
-                animationView.animationImages = spinArray
-                animationView.animationDuration = 2.0
-                self.animationView.animationRepeatCount = number
-            default:
-                animationView.image = UIImage(named: "panda1")
-            }
-            
-            
-        }
-        
-    }
+//    func startAnimating() {
+//        
+//
+//        for (action, number) in actionsArray{
+//            switch action{
+//                
+//            case "LF":
+//                animationView.animationImages = leftFlipArray
+//                animationView.animationDuration = 2.0
+//                self.animationView.animationRepeatCount = number
+//            case "RF":
+//                animationView.animationImages = rightFlipArray
+//                animationView.animationDuration = 2.0
+//                self.animationView.animationRepeatCount = number
+//            case "LL":
+//                animationView.animationImages = leftLeapArray
+//                animationView.animationDuration = 2.0
+//                self.animationView.animationRepeatCount = number
+//            case "RL":
+//                animationView.animationImages = rightLeapArray
+//                animationView.animationDuration = 2.0
+//                self.animationView.animationRepeatCount = number
+//            case "S":
+//                animationView.animationImages = spinArray
+//                animationView.animationDuration = 2.0
+//                self.animationView.animationRepeatCount = number
+//            default:
+//                animationView.image = UIImage(named: "panda1")
+//            }
+//            
+//            
+//        }
+//        
+//    }
 
     
     //Add switch case to run action array
