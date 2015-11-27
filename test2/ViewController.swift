@@ -17,7 +17,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var pickerViewData: [String] = [String]()
     
-    var experiment:String = "Experiment 1"
+    var experiment:Int = 0
     
     @IBOutlet weak var subjectID: UITextField!
     
@@ -35,9 +35,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         pickerViewData = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"]
         
         //selected experiment number
-        func selectedExperiment(pickerView: UIPickerView!, didSelectRow:String){
-            experiment = didSelectRow
-        }
+//        func selectedExperiment(pickerView: UIPickerView!, didSelectRow:String){
+//            experiment = didSelectRow
+//        }
         
     }
     
@@ -54,7 +54,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     // The data to return for the row and component (column) that's being passed in
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+        switch pickerViewData[row]{
+        case "Experiment 1":
+            experiment = 1
+        case "Experiment 2":
+            experiment = 2
+        case "Experiment 3":
+            experiment = 3
+        case "Experiment 4":
+            experiment = 4
+        case "Experiment 5":
+            experiment = 5
+        default:
+            experiment = 0
+        }
         return pickerViewData[row]
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let secondVC: SecondViewController = segue.destinationViewController as! SecondViewController
+
+        secondVC.experimentRecieved = experiment
     }
     
 
