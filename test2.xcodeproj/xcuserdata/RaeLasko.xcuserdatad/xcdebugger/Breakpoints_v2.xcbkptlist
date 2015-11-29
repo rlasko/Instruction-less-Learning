@@ -114,11 +114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469520606.489782"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "didClickThree(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -130,11 +130,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469520606.489782"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "didClickSpinButton(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -146,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469520606.489782"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "didClickSpinButton(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -172,11 +172,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469520606.489782"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "leftFlipArray"
             landmarkType = "19">
             <Locations>
@@ -265,11 +265,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469556575.357561"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "didClickGo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -281,12 +281,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469556575.357561"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "imageAnim()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "animateLabel()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -297,27 +297,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "test2/SecondViewController.swift"
-            timestampString = "469556575.357561"
+            timestampString = "470461306.344371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "animateeee(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "test2/SecondViewController.swift"
-            timestampString = "469520606.489782"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "spinArray"
             landmarkType = "19">
             <Locations>
@@ -412,6 +396,22 @@
             startingLineNumber = "79"
             endingLineNumber = "79"
             landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "test2/SecondViewController.swift"
+            timestampString = "470461634.190631"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "animateLabel()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

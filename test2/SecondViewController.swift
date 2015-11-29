@@ -12,10 +12,13 @@ import AVFoundation
 class SecondViewController: UIViewController {
     
     @IBOutlet weak var arrayLabel: UILabel!
-
+    
+    enum Action {
+        case LF, RF, LL, RL, S
+    }
     
     //initiate variables
-    var actionsArray = [(action: String, number: Int)]()
+    var actionsArray = [(action: Action, number: Int)]()
     var experimentRecieved:Int = 0
     var number:Int = 10
     var lastButtonWasNumber:Bool = true
@@ -55,8 +58,6 @@ class SecondViewController: UIViewController {
     var currentActionArray:[UIImage] = [
         UIImage(named: "panda1")!
     ]
-
-    
 
     @IBOutlet weak var animationView: UIImageView!
     
@@ -132,28 +133,28 @@ class SecondViewController: UIViewController {
     
     //if any action button clicked, change bool
     @IBAction func didClickLeftFlipButton(sender: AnyObject) {
-        actionsArray.append(("LF",1))
+        actionsArray.append((.LF,1))
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickRightFlipButton(sender: AnyObject) {
-        actionsArray.append(("RF",1))
+        actionsArray.append((.RF,1))
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickLeftLeapButton(sender: AnyObject) {
-        actionsArray.append(("LL",1))
+        actionsArray.append((.LL,1))
         lastButtonWasNumber = false
     }
     
     @IBAction func didClickRightLeapButton(sender: AnyObject) {
-        actionsArray.append(("RL",1))
+        actionsArray.append((.RL,1))
         lastButtonWasNumber = false
     }
 
 
     @IBAction func didClickSpinButton(sender: AnyObject) {
-        actionsArray.append(("S",1))
+        actionsArray.append((.S,1))
         lastButtonWasNumber = false
     }
 
@@ -161,12 +162,12 @@ class SecondViewController: UIViewController {
     //switch determines mystery funct.
     @IBAction func didClickMysteryButton(sender: AnyObject) {
 //        switch experimentRecieved{
-//            case "Experiment 1":
+//            case 1:
 //                for (_,number) in actionsArray{
 //                    number = number*2
 //            }
-//            case "Experiment 2":
-//            case "Experiment 3":
+//            case 2:
+//            case 3:
 //            case "Experiment 4":
 //            case "Experiment 5":
 //            
@@ -186,7 +187,8 @@ class SecondViewController: UIViewController {
     
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
-        animateeee()
+        animateLabel();
+
 
         
         
@@ -196,53 +198,41 @@ class SecondViewController: UIViewController {
     }
     
     
-    func animationViewAnimateImages(action:String, index:Int = 0, completion:(Bool)->Void) {
-        
-        
-  
 
-    }
     
-    func animateImage() {
-        self.animationView.animationImages = currentActionArray
-        self.animationView.animationDuration = kTimeDuration
-        self.animationView.animationRepeatCount = repeatAction
-        animationView.startAnimating()
-    }
+    func animateLabel() {
         
-    func animateeee(i:Int = 0) {
-        
-        guard i < actionsArray.count && !actionsArray.isEmpty else {
+        guard !actionsArray.isEmpty else {
             return
         }
-        let time:dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(kTimeDuration * Double(repeatAction)) * Int64(NSEC_PER_SEC))
         
-        var currentAction:String = actionsArray[i].action
-        repeatAction = actionsArray[i].number
-
+        let currentAction:Action = actionsArray.first!.action
+        repeatAction = actionsArray.first!.number
+        
         switch currentAction{
-        case "LF":
+        case .LF:
             currentActionArray = leftFlipArray
-        case "RF":
+        case .RF:
             currentActionArray = rightFlipArray
-        case "LL":
+        case .LL:
             currentActionArray = leftLeapArray
-        case "RL":
+        case .RL:
             currentActionArray = rightLeapArray
-        case "S":
+        case .S:
             currentActionArray = spinArray
-        default:
-            animationView.image = UIImage(named: "panda1")
-        
         }
         
-        animateImage()
-        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
-            self.animateeee(i+1)
+        UIView.transitionWithView(animationView, duration: 2.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+            self.animationView.image = self.currentActionArray[0]
+            }) { (completion) -> Void in
+//                if completion {
+                    self.animationView.image = self.currentActionArray[1];
+                    self.actionsArray.removeFirst()
+                    self.animateLabel();
+//                }
         }
+        
     }
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
