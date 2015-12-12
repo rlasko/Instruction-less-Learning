@@ -36,7 +36,7 @@
                                 <rect key="frame" x="243" y="379" width="84" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="49B-nn-fem">
@@ -142,14 +142,6 @@
                                     <action selector="didClickTwo:" destination="st1-jg-CWF" eventType="touchUpInside" id="SzW-2M-rh1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="en0-5p-o9q">
-                                <rect key="frame" x="535" y="869" width="57" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="0"/>
-                                <connections>
-                                    <action selector="didClickZero:" destination="st1-jg-CWF" eventType="touchUpInside" id="xLf-Jg-j16"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N1Q-mB-5QE">
                                 <rect key="frame" x="600" y="796" width="57" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -191,7 +183,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vIm-JH-uiI">
-                                <rect key="frame" x="470" y="869" width="57" height="65"/>
+                                <rect key="frame" x="470" y="869" width="187" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Go"/>
                                 <connections>
@@ -212,14 +204,6 @@
                                 <state key="normal" title="5"/>
                                 <connections>
                                     <action selector="didClickFive:" destination="st1-jg-CWF" eventType="touchUpInside" id="BQS-8e-Nko"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4aC-Ec-wGm">
-                                <rect key="frame" x="600" y="869" width="57" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Clear"/>
-                                <connections>
-                                    <action selector="didClickClear:" destination="st1-jg-CWF" eventType="touchUpInside" id="Uzz-Ig-xiq"/>
                                 </connections>
                             </button>
                         </subviews>

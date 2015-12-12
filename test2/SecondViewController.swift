@@ -58,17 +58,12 @@ class SecondViewController: UIViewController {
     var currentActionArray:[UIImage] = [
         UIImage(named: "panda1")!
     ]
+    var playActionArray: [Action] = []
 
     @IBOutlet weak var animationView: UIImageView!
     
     //if any of number button clicked, change var number
-    @IBAction func didClickZero(sender: AnyObject) {
-        if lastButtonWasNumber == false{
-            actionsArray[actionsArray.count-1].number = 0
-        }
-        lastButtonWasNumber = true
-    }
-    @IBAction func didClickOne(sender: AnyObject) {
+      @IBAction func didClickOne(sender: AnyObject) {
         if lastButtonWasNumber == false{
             actionsArray[actionsArray.count-1].number = 1
         }
@@ -161,53 +156,61 @@ class SecondViewController: UIViewController {
     
     //switch determines mystery funct.
     @IBAction func didClickMysteryButton(sender: AnyObject) {
-//        switch experimentRecieved{
-//            case 1:
-//                for (_,number) in actionsArray{
-//                    number = number*2
-//            }
-//            case 2:
-//            case 3:
-//            case "Experiment 4":
-//            case "Experiment 5":
-//            
-//        }
+        switch experimentRecieved{
+            case 1:
+                actionsArray += actionsArray
+            
+            case 2:
+                for (_, var repeats) in actionsArray{
+                    repeats = repeats*3
+            }
+            case 3:
+                for (_, var repeats) in actionsArray{
+                    repeats = repeats*10
+            }
+            case 4:
+                for (_, var repeats) in actionsArray{
+                    repeats = repeats*2
+            }
+            case 5:
+                for (_, var repeats) in actionsArray{
+                    repeats = repeats*2
+            }
+        default:
+            animationView.image = UIImage(named: "panda1")
+            
+        }
 
         //handles exception - cannot select number after this button
         lastButtonWasNumber = true
     }
     
-    //clear actionsArray
-    @IBAction func didClickClear(sender: AnyObject) {
-        actionsArray = []
-        
-        //handles exception - sequence must begin with action
-        lastButtonWasNumber = true
-    }
+
     
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
+        for (action,number) in actionsArray {
+            for _ in 1...number {
+            playActionArray.append(action)
+            }
+        }
         animateLabel();
+        actionsArray = []
 
-
-        
         
         //handles exception - sequence must begin with action
         lastButtonWasNumber = true
-
     }
     
     
-
-    
     func animateLabel() {
         
-        guard !actionsArray.isEmpty else {
+        guard !playActionArray.isEmpty else {
             return
         }
         
-        let currentAction:Action = actionsArray.first!.action
-        repeatAction = actionsArray.first!.number
+        let currentAction:Action = playActionArray.first!
+        //repeatAction = actionsArray.first!.number
         
         switch currentAction{
         case .LF:
@@ -225,11 +228,9 @@ class SecondViewController: UIViewController {
         UIView.transitionWithView(animationView, duration: 2.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
             self.animationView.image = self.currentActionArray[0]
             }) { (completion) -> Void in
-//                if completion {
-                    self.animationView.image = self.currentActionArray[1];
-                    self.actionsArray.removeFirst()
-                    self.animateLabel();
-//                }
+                    self.animationView.image = self.currentActionArray[1]
+                    self.playActionArray.removeFirst()
+                    self.animateLabel()
         }
         
     }
