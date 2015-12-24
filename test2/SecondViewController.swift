@@ -167,7 +167,7 @@ class SecondViewController: UIViewController {
     }
 
     
-    //switch determines mystery funct.
+    //switch determines mystery function
     @IBAction func didClickMysteryButton(sender: AnyObject) {
         switch experimentRecieved{
             case 1:
@@ -199,7 +199,6 @@ class SecondViewController: UIViewController {
     }
     
 
-    
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
         
