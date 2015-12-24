@@ -13,15 +13,25 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var arrayLabel: UILabel!
     
+    
+    //create type to record user selected actions
     enum Action {
         case LF, RF, LL, RL, S
     }
     
     //initiate variables
+    
+    //Holds sequence as it is being entered by user
     var actionsArray = [(action: Action, number: Int)]()
+    
+    //recieves data from ViewController. Determines function of mystery key
     var experimentRecieved:Int = 0
+    
     var number:Int = 10
+    
+    //Checks that inputs are syntatically correct
     var lastButtonWasNumber:Bool = true
+    
     var pandaArray = [
         UIImage(named: "panda1")!,
         UIImage(named: "panda2")!,
@@ -32,6 +42,8 @@ class SecondViewController: UIViewController {
         UIImage(named: "panda7")!,
         UIImage(named: "panda8")!
     ]
+    
+    //Arrays of animation sequences
     var leftFlipArray = [
         UIImage(named: "leftFlip")!,
         UIImage(named: "blank")!
@@ -52,12 +64,13 @@ class SecondViewController: UIViewController {
         UIImage(named: "spin")!,
         UIImage(named: "blank")!
     ]
-    var playArray:[UIImage] = []
-    let kTimeDuration:Double = 1
-    var repeatAction:Int = 1
+    
+    //Assists in animating by holding the animation that should currently by animated
     var currentActionArray:[UIImage] = [
         UIImage(named: "panda1")!
     ]
+    
+    //Populated after Go is pressed. Actions and numbers removed from tuples in actionsArray
     var playActionArray: [Action] = []
 
     @IBOutlet weak var animationView: UIImageView!
@@ -189,6 +202,8 @@ class SecondViewController: UIViewController {
     
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
+        
+        //appends actions to playActions array from actionsArray. Removes elements from tuples --> type action
         for (action,number) in actionsArray {
             for _ in 1...number {
             playActionArray.append(action)
@@ -205,13 +220,16 @@ class SecondViewController: UIViewController {
     
     func animateLabel() {
         
+        //When playActionArray is empty, stop the recursive calls
         guard !playActionArray.isEmpty else {
             return
         }
         
+        //initialize currentAction to the first element in playActionArray
         let currentAction:Action = playActionArray.first!
-        //repeatAction = actionsArray.first!.number
         
+        
+        //Change the currentActionArray to the correct one based on the action that is denoted in playActionArray
         switch currentAction{
         case .LF:
             currentActionArray = leftFlipArray
@@ -225,6 +243,10 @@ class SecondViewController: UIViewController {
             currentActionArray = spinArray
         }
         
+        
+        //Play animation from playActionArray
+        //currentActionArray contains the array of the animation sequence that is currently playing
+        //Recursively callse animateLabel() until playActionArray is empty
         UIView.transitionWithView(animationView, duration: 2.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
             self.animationView.image = self.currentActionArray[0]
             }) { (completion) -> Void in
