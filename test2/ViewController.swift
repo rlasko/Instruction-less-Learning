@@ -76,6 +76,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let secondVC: SecondViewController = segue.destinationViewController as! SecondViewController
 
         secondVC.experimentRecieved = experiment
+        secondVC.subjectString = subject
     }
     
 

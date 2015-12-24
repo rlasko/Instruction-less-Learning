@@ -9,10 +9,17 @@
 import UIKit
 import AVFoundation
 
+
+
 class SecondViewController: UIViewController {
+    
+
+    
     
     @IBOutlet weak var arrayLabel: UILabel!
     
+    //Subject ID
+    var subjectString:String = "None"
     
     //create type to record user selected actions
     enum Action {
@@ -170,21 +177,30 @@ class SecondViewController: UIViewController {
     //switch determines mystery function
     @IBAction func didClickMysteryButton(sender: AnyObject) {
         switch experimentRecieved{
+            
+            //play animation twice
             case 1:
                 actionsArray += actionsArray
             
+            //play each element 3 times denoted ie axyz --> aaaxxxyyyzzz
             case 2:
                 for (_, var repeats) in actionsArray{
                     repeats = repeats*3
             }
+            
+            //play the second to last element twice indicated ie axyz --> axyyz
             case 3:
-                for (_, var repeats) in actionsArray{
-                    repeats = repeats*10
+                if actionsArray.count > 2{
+                    actionsArray[actionsArray.count - 2].number = actionsArray[actionsArray.count - 2].number * 2
             }
+            
+            //play the second element twice the indicated ie axyz --> axxyz
             case 4:
-                for (_, var repeats) in actionsArray{
-                    repeats = repeats*2
+                if actionsArray.count > 2 {
+                    actionsArray[1].number = actionsArray[1].number * 2
             }
+            
+            //play each element 3 times denoted ie axyz --> aaxxyyzz
             case 5:
                 for (_, var repeats) in actionsArray{
                     repeats = repeats*2
@@ -194,7 +210,7 @@ class SecondViewController: UIViewController {
             
         }
 
-        //handles exception - cannot select number after this button
+        //handles logical exception - cannot select number after this button
         lastButtonWasNumber = true
     }
     
@@ -212,7 +228,8 @@ class SecondViewController: UIViewController {
         actionsArray = []
 
         
-        //handles exception - sequence must begin with action
+        
+        //handles logical exception - sequence must begin with action
         lastButtonWasNumber = true
     }
     
