@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MessageUI
 
 
 
@@ -30,6 +31,12 @@ class SecondViewController: UIViewController {
     
     //Holds sequence as it is being entered by user
     var actionsArray = [(action: Action, number: Int)]()
+    
+    var exportArray = [
+        ([(action:Action, number: Int)],mystery:Int)
+            ]()
+    
+    var mysteryNum: Int = 0
     
     //recieves data from ViewController. Determines function of mystery key
     var experimentRecieved:Int = 0
@@ -79,6 +86,8 @@ class SecondViewController: UIViewController {
     
     //Populated after Go is pressed. Actions and numbers removed from tuples in actionsArray
     var playActionArray: [Action] = []
+    
+    
 
     @IBOutlet weak var animationView: UIImageView!
     
@@ -176,6 +185,14 @@ class SecondViewController: UIViewController {
     
     //switch determines mystery function
     @IBAction func didClickMysteryButton(sender: AnyObject) {
+        
+        mysteryNum += 1
+        
+        if mysteryNum == 1{
+        exportArray.append((actionsArray,0))
+        }
+        
+        
         switch experimentRecieved{
             
             //play animation twice
@@ -217,6 +234,13 @@ class SecondViewController: UIViewController {
 
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
+        
+        if mysteryNum > 0 {
+            exportArray[exportArray.count - 1].mystery = mysteryNum
+        }else{
+            exportArray.append((actionsArray,mysteryNum))
+        }
+        
         
         //appends actions to playActions array from actionsArray. Removes elements from tuples --> type action
         for (action,number) in actionsArray {
