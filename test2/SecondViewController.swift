@@ -2,19 +2,63 @@
 //  SecondViewController.swift
 //  test2
 //
-//  Created by Rae  Lasko on 10/28/15.
-//  Copyright © 2015 Rae  Lasko. All rights reserved.
+//  Created by Rae Lasko on 10/28/15.
+//  Copyright © 2015 Rae Lasko. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 import MessageUI
+import Foundation
 
-
+extension String{
+    func stringByAppendingPathExtension(ext: String) -> String? {
+        
+        let nsSt = self as NSString
+        
+        return nsSt.stringByAppendingPathExtension(ext)
+    }
+}
 
 class SecondViewController: UIViewController {
-    
 
+    
+    func dataFilePath() -> String {
+        var paths:Array = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory:String = paths[0]
+        return documentsDirectory.stringByAppendingPathExtension("myfile.csv")!
+    }
+    
+    @IBAction func exportButton(sender: AnyObject) {
+        if !NSFileManager.defaultManager().fileExistsAtPath(self.dataFilePath()){
+        NSFileManager.defaultManager().createFileAtPath(self.dataFilePath(), contents: nil, attributes: nil)
+        NSLog("Routo creato")
+        }
+        
+        var writeString:String = String(stringInterpolationSegment: 0)
+        
+        
+        for i in 0..<exportArray.count{
+            
+
+            let current:String = String(exportArray[i].arr) + String(exportArray[i].mystery)
+            
+            writeString += current
+        }
+        
+            NSLog("writeString: %@)", writeString)
+        
+            let handle = NSFileHandle(forWritingAtPath: self.dataFilePath())
+        
+            handle!.truncateFileAtOffset(handle!.seekToEndOfFile())
+            handle!.writeData(writeString.dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+    
+        
+    }
+    
+    
     
     
     @IBOutlet weak var arrayLabel: UILabel!
@@ -32,10 +76,12 @@ class SecondViewController: UIViewController {
     //Holds sequence as it is being entered by user
     var actionsArray = [(action: Action, number: Int)]()
     
+    //Initialize array to export to txt file
     var exportArray = [
-        ([(action:Action, number: Int)],mystery:Int)
+        (arr:[(action:Action, number: Int)],mystery:Int)
             ]()
     
+    //initialize mystery button
     var mysteryNum: Int = 0
     
     //recieves data from ViewController. Determines function of mystery key
@@ -235,12 +281,20 @@ class SecondViewController: UIViewController {
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
         
+        
+        /* If mysteryNum is greater than zero, then user has clicked mystery num. If user has clicked mysteryNum
+            then actionsArray was already appended to exportArray. Now add the corresponding mysteryNum
+            This allows the user to click mystery multiple times.
+            */
         if mysteryNum > 0 {
             exportArray[exportArray.count - 1].mystery = mysteryNum
         }else{
-            exportArray.append((actionsArray,mysteryNum))
+            //In the case that mysteryNum is 0, append mysteryNum
+            exportArray.append((actionsArray,0))
         }
         
+        //Reset mysteryNum
+        mysteryNum = 0
         
         //appends actions to playActions array from actionsArray. Removes elements from tuples --> type action
         for (action,number) in actionsArray {
@@ -294,7 +348,6 @@ class SecondViewController: UIViewController {
                     self.playActionArray.removeFirst()
                     self.animateLabel()
         }
-        
     }
     
     override func viewDidLoad() {

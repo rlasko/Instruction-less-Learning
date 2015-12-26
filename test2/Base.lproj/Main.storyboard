@@ -195,6 +195,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="9"/>
                                 <connections>
+                                    <action selector="didClickExportButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="PfN-Kh-qQU"/>
                                     <action selector="didClickNine:" destination="st1-jg-CWF" eventType="touchUpInside" id="NiN-Op-R7N"/>
                                 </connections>
                             </button>
@@ -209,14 +210,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Gbg-cK-vNO"/>
+                    <navigationItem key="navigationItem" id="Gbg-cK-vNO">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="5kE-0f-Hop">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TYC-K3-f8a">
+                                <rect key="frame" x="578" y="7" width="170" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="exportButton:" destination="st1-jg-CWF" eventType="touchUpInside" id="ccX-W4-TFY"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="animationView" destination="aLD-7W-RaI" id="FIY-rW-b0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7g-IE-27U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1110" y="451"/>
+            <point key="canvasLocation" x="1218" y="451"/>
         </scene>
     </scenes>
 </document>
