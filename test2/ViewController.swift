@@ -34,11 +34,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //Create Picker Array
         pickerViewData = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"]
         
-        //selected experiment number
-//        func selectedExperiment(pickerView: UIPickerView!, didSelectRow:String){
-//            experiment = didSelectRow
-//        }
-        
     }
     
 
@@ -72,6 +67,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return pickerViewData[row]
     }
     
+    
+    //Send data to SecondViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let secondVC: SecondViewController = segue.destinationViewController as! SecondViewController
 
@@ -79,7 +76,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         secondVC.subjectString = subject
     }
     
-
+    //lower keyboard on touch elsewhere
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
         view.endEditing(true)
         super.touchesBegan(touches, withEvent: event)
@@ -88,6 +85,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        //Navigation bar appearence
+        navigationController!.navigationBar.barTintColor = UIColor.blackColor()
     }
 
 }

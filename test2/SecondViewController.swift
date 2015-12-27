@@ -20,7 +20,7 @@ extension String{
     }
 }
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
     
     func dataFilePath() -> String {
@@ -53,9 +53,30 @@ class SecondViewController: UIViewController {
             handle!.truncateFileAtOffset(handle!.seekToEndOfFile())
             handle!.writeData(writeString.dataUsingEncoding(NSUTF8StringEncoding)!)
         
+       //send email
         
+        if( MFMailComposeViewController.canSendMail() ) {
+            
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self
+            
+            //Set the subject and message of the email
+            mailComposer.setSubject(subjectString)
+            mailComposer.setMessageBody("", isHTML: false)
+            
+            if let filePath = NSBundle.mainBundle().pathForResource("myfile", ofType: "txt") {
+                
+                if let fileData = NSData(contentsOfFile: filePath) {
+                    mailComposer.addAttachmentData(fileData, mimeType: "text/csv", fileName: "myfile")
+                }
+            }
+            self.presentViewController(mailComposer, animated: true, completion: nil)
+        }
+        
+        func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     
-        
     }
     
     
@@ -352,6 +373,7 @@ class SecondViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
@@ -373,3 +395,4 @@ class SecondViewController: UIViewController {
     */
 
 }
+
