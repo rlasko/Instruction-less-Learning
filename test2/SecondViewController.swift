@@ -26,7 +26,9 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
     func dataFilePath() -> String {
         var paths:Array = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         let documentsDirectory:String = paths[0]
-        return documentsDirectory.stringByAppendingPathExtension("myfile.csv")!
+         let docs = documentsDirectory.stringByAppendingPathExtension("myfile.csv")!
+       
+        return docs
     }
     
     @IBAction func exportButton(sender: AnyObject) {
@@ -48,11 +50,15 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         
             NSLog("writeString: %@)", writeString)
         
-            let handle = NSFileHandle(forWritingAtPath: self.dataFilePath())
-        
-            handle!.truncateFileAtOffset(handle!.seekToEndOfFile())
-            handle!.writeData(writeString.dataUsingEncoding(NSUTF8StringEncoding)!)
-        
+//            let handle = NSFileHandle(forWritingAtPath: self.dataFilePath())
+//        
+//            handle!.truncateFileAtOffset(handle!.seekToEndOfFile())
+//            handle!.writeData(writeString.dataUsingEncoding(NSUTF8StringEncoding)!)
+//            handle!.readDataToEndOfFile()
+//        
+        try! writeString.writeToFile(dataFilePath(), atomically: true, encoding: NSUTF8StringEncoding)
+        var readString =  try! NSString(contentsOfFile: dataFilePath(), encoding: NSUTF8StringEncoding)
+    
        //send email
         
         if( MFMailComposeViewController.canSendMail() ) {
@@ -62,19 +68,21 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
             
             //Set the subject and message of the email
             mailComposer.setSubject(subjectString)
-            mailComposer.setMessageBody("", isHTML: false)
+            mailComposer.setMessageBody("", isHTML: true)
             
-            if let filePath = NSBundle.mainBundle().pathForResource("myfile", ofType: "txt") {
-                
-                if let fileData = NSData(contentsOfFile: filePath) {
-                    mailComposer.addAttachmentData(fileData, mimeType: "text/csv", fileName: "myfile")
-                }
-            }
-            self.presentViewController(mailComposer, animated: true, completion: nil)
+            
+                let fileData = NSData(contentsOfFile: dataFilePath())
+            
+                    //mailComposer.addAttachmentData(fileData!, mimeType: "text/plain", fileName: "myfile.txt")
+            
+            
+            navigationController!.presentViewController(mailComposer, animated: true, completion: nil)
         }
         
         func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            NSLog("%@", error)
+            
         }
     
     }
@@ -126,11 +134,25 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
     
     //Arrays of animation sequences
     var leftFlipArray = [
-        UIImage(named: "leftFlip")!,
-        UIImage(named: "blank")!
+        UIImage(named: "LF0")!,
+        UIImage(named: "LF1")!,
+        UIImage(named: "LF2")!,
+        UIImage(named: "LF3")!,
+        UIImage(named: "LF4")!,
+        UIImage(named: "LF5")!,
+        UIImage(named: "LF6")!,
+        UIImage(named: "LF7")!,
+        UIImage(named: "LF8")!,
+        UIImage(named: "LF9")!,
+        UIImage(named: "LF10")!,
+        UIImage(named: "LF11")!,
+        UIImage(named: "LF12")!,
+        UIImage(named: "LF13")!,
+        UIImage(named: "LF14")!
     ]
     var rightFlipArray = [
         UIImage(named: "rightFlip")!,
+        UIImage(named: "LF9")!,
         UIImage(named: "blank")!
     ]
     var leftLeapArray = [
@@ -362,7 +384,8 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         //Play animation from playActionArray
         //currentActionArray contains the array of the animation sequence that is currently playing
         //Recursively callse animateLabel() until playActionArray is empty
-        UIView.transitionWithView(animationView, duration: 2.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+        
+        UIView.transitionWithView(animationView, duration: 0.2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
             self.animationView.image = self.currentActionArray[0]
             }) { (completion) -> Void in
                     self.animationView.image = self.currentActionArray[1]

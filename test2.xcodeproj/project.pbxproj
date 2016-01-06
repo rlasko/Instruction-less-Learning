@@ -14,7 +14,7 @@
 		52D990CF1BDACF990024687C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D990CD1BDACF990024687C /* LaunchScreen.storyboard */; };
 		52D990DA1BDACF990024687C /* test2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990D91BDACF990024687C /* test2Tests.swift */; };
 		52D990E51BDACF990024687C /* test2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990E41BDACF990024687C /* test2UITests.swift */; };
-		52D990FB1BE0A5300024687C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990FA1BE0A5300024687C /* SecondViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		52D990FB1BE0A5300024687C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990FA1BE0A5300024687C /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +195,7 @@
 				TargetAttributes = {
 					52D990C01BDACF990024687C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = UGUNRYBRQZ;
 					};
 					52D990D41BDACF990024687C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -402,10 +403,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = test2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rlasko.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -413,10 +417,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = test2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rlasko.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

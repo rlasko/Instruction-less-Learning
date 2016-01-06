@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var subjectID: UITextField!
     
-    @IBAction func input(sender : UIButton) {
+    @IBAction func input(sender : UITextField) {
         subject = String(subjectID.text)
     }
 
@@ -73,7 +73,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let secondVC: SecondViewController = segue.destinationViewController as! SecondViewController
 
         secondVC.experimentRecieved = experiment
-        secondVC.subjectString = subject
+        secondVC.subjectString = String(subjectID.text)
     }
     
     //lower keyboard on touch elsewhere
