@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52319CEB1C45D63700CD4810 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52319CEA1C45D63700CD4810 /* beep.mp3 */; };
 		52D990C51BDACF990024687C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990C41BDACF990024687C /* AppDelegate.swift */; };
 		52D990C71BDACF990024687C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990C61BDACF990024687C /* ViewController.swift */; };
 		52D990CA1BDACF990024687C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D990C81BDACF990024687C /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52319CEA1C45D63700CD4810 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = Assets.xcassets/beep.dataset/beep.mp3; sourceTree = "<group>"; };
 		52D990C11BDACF990024687C /* test2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D990C41BDACF990024687C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D990C61BDACF990024687C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				52D990FA1BE0A5300024687C /* SecondViewController.swift */,
 				52D990CB1BDACF990024687C /* Assets.xcassets */,
 				52D990CD1BDACF990024687C /* LaunchScreen.storyboard */,
+				52319CEA1C45D63700CD4810 /* beep.mp3 */,
 				52D990D01BDACF990024687C /* Info.plist */,
 			);
 			path = test2;
@@ -234,6 +237,7 @@
 			files = (
 				52D990CF1BDACF990024687C /* LaunchScreen.storyboard in Resources */,
 				52D990CC1BDACF990024687C /* Assets.xcassets in Resources */,
+				52319CEB1C45D63700CD4810 /* beep.mp3 in Resources */,
 				52D990CA1BDACF990024687C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
