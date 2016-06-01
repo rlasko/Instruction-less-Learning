@@ -13,33 +13,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     var subject:String = "Error: Did Not Enter Subject ID"
     
-    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var pickerViewExp: UIPickerView!
     
     @IBOutlet weak var pickerViewNumber: UIPickerView!
-    var pickerViewData: [String] = [String]()
-    var pickerViewNumberData:[Int] = [Int]()
+    let pickerViewData: [String] = ["Repeat the immediately prior step N times", "Repeat the entire prior program, N times", "Repeat the most recent N steps once", "Repeat the first N steps once", "Repeat the Nth step from the start of the program once", "Repeat the Nth step from the end of the program once"]
+    let pickerViewNumberData:[Int] = [1,2,3,4,5,6,7,8,9]
     
-    var experiment:Int = 0
+    var experiment:Int = 1
     
     @IBOutlet weak var subjectID: UITextField!
     
 
     
     @IBAction func input(sender : UITextField) {
-        subject = String(subjectID.text)
+        
+        
+        subject = sender.text!
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Connect Picker
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
-        self.pickerViewNumber.delegate = self
-        self.pickerViewNumber.dataSource = self
+        self.pickerViewExp.delegate = self
+        self.pickerViewExp.dataSource = self
         
         //Create Picker Array
-        pickerViewData = ["Experiment 1", "Experiment 2", "Experiment 3", "Experiment 4", "Experiment 5"]
-        pickerViewNumberData = [1,2,3,4,5,6,7,8,9]
+
     }
     
 
@@ -48,18 +47,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return 1
     }
     
-    func numberOfComponentsInPickerViewNumber(pickerViewNumber: UIPickerView) -> Int {
-        return 1
-    }
+
     
     // The number of rows of data
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerViewData.count
+        switch (pickerView){
+        case pickerViewExp:
+            return pickerViewData.count
+        case pickerViewNumber:
+            return pickerViewNumberData.count
+        default:
+            return 6
+        }
+        
     }
     
-    func pickerViewNumber(pickerViewNumber: UIPickerView, numberOfRowsInComponent component2: Int) -> Int {
-        return pickerViewNumberData.count
-    }
+
+
 
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView
@@ -68,41 +72,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         pickerLabel.textColor = UIColor.whiteColor()
         pickerLabel.text = pickerViewData[row]
         // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
-        pickerLabel.font = UIFont(name: "Apple SD Gothic Neo", size: 35) // In this use your custom font
+        pickerLabel.font = UIFont(name: "Apple SD Gothic Neo", size: 20) // In this use your custom font
         pickerLabel.textAlignment = NSTextAlignment.Center
-        switch pickerViewData[row]{
-        case "Experiment 1":
-            experiment = 1
-        case "Experiment 2":
-            experiment = 2
-        case "Experiment 3":
-            experiment = 3
-        case "Experiment 4":
-            experiment = 4
-        case "Experiment 5":
-            experiment = 5
-        default:
-            experiment = 0
-        }
         return pickerLabel
-        
-    }
-    
-    func pickerViewNumber(pickerViewNumber: UIPickerView, viewForRow row: Int, forComponent component2: Int, reusingView view: UIView?) -> UIView
-    {
-        let pickerLabel2 = UILabel()
-        pickerLabel2.textColor = UIColor.whiteColor()
-        pickerLabel2.text = String(pickerViewNumberData[row])
-        // pickerLabel.font = UIFont(name: pickerLabel.font.fontName, size: 15)
-        pickerLabel2.font = UIFont(name: "Apple SD Gothic Neo", size: 35) // In this use your custom font
-        pickerLabel2.textAlignment = NSTextAlignment.Center
-
-        return pickerLabel2
-        
     }
 
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 
+        experiment = row + 1
+
+    }
     
+
     
     //Send data to SecondViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -110,6 +91,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         secondVC.experimentRecieved = experiment
         secondVC.subjectString = String(subjectID.text)
+        
     }
     
     //lower keyboard on touch elsewhere

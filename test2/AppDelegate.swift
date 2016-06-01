@@ -13,8 +13,13 @@ import MessageUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mailViewController = EmailManager()
-
+    var mailViewController:EmailManager
+    
+    override init() {
+        mailViewController = EmailManager()
+        super.init()
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let navigationBarAppearace = UINavigationBar.appearance()
@@ -22,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.barTintColor = UIColor(colorLiteralRed: 0/255, green: 100/255, blue: 200/255, alpha: 1)
         
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-    
-
         return true
     }
     
@@ -59,12 +62,17 @@ public class EmailManager : NSObject, MFMailComposeViewControllerDelegate
     public override init()
     {
         mailComposeViewController = MFMailComposeViewController()
+        super.init()
+//        mailComposeViewController!.mailComposeDelegate = self
+
     }
     
     private func cycleMailComposer()
     {
         mailComposeViewController = nil
         mailComposeViewController = MFMailComposeViewController()
+//        mailComposeViewController!.mailComposeDelegate = self
+
     }
     
     public func sendMailTo(emailList:[String], subject:String, attachment:NSData, body:String, fromViewController:UIViewController)
@@ -72,10 +80,12 @@ public class EmailManager : NSObject, MFMailComposeViewControllerDelegate
         if MFMailComposeViewController.canSendMail() {
             mailComposeViewController!.setSubject(subject)
             mailComposeViewController!.setMessageBody(body, isHTML: false)
-            mailComposeViewController?.addAttachmentData(attachment, mimeType: "text/plain", fileName: "myfile.txt")
+            mailComposeViewController!.addAttachmentData(attachment, mimeType: "text/plain", fileName: "myfile.txt")
+            mailComposeViewController?.mailComposeDelegate = fromViewController as? SecondViewController
             mailComposeViewController!.setToRecipients(emailList)
-            mailComposeViewController?.mailComposeDelegate = self
-            fromViewController.presentViewController(mailComposeViewController!, animated: true, completion: nil)
+            fromViewController.presentViewController(mailComposeViewController!, animated: true, completion: {
+                
+            })
         }
         else {
             print("Could not open email app")
@@ -84,9 +94,13 @@ public class EmailManager : NSObject, MFMailComposeViewControllerDelegate
     
     public func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?)
     {
+        if (error != nil) {
+            print("error")
+        }
         controller.dismissViewControllerAnimated(true) { () -> Void in
-            self.cycleMailComposer()
+//            self.cycleMailComposer()
         }
     }
+
 }
 

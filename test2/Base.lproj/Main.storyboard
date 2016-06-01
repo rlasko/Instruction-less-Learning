@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Xks-0r-u0W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="Xks-0r-u0W">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -57,12 +57,8 @@
                                     <segue destination="st1-jg-CWF" kind="push" id="jUn-Yh-nbC"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" id="peQ-wb-M9J">
-                                <rect key="frame" x="484" y="404" width="132" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                             <pickerView contentMode="scaleToFill" id="WqY-Yj-J5r">
-                                <rect key="frame" x="109" y="369" width="367" height="285"/>
+                                <rect key="frame" x="117" y="369" width="535" height="285"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                         </subviews>
@@ -70,8 +66,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bGX-lK-PoB"/>
                     <connections>
-                        <outlet property="pickerView" destination="WqY-Yj-J5r" id="NQt-89-Gko"/>
-                        <outlet property="pickerViewNumber" destination="peQ-wb-M9J" id="hHe-R0-FW9"/>
+                        <outlet property="pickerViewExp" destination="WqY-Yj-J5r" id="lRZ-0s-qn0"/>
                         <outlet property="subjectID" destination="49B-nn-fem" id="HeS-zn-fnA"/>
                     </connections>
                 </viewController>

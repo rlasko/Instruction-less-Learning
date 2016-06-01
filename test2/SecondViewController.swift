@@ -41,21 +41,39 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         
         
         for i in 0..<exportArray.count{
+            var current:String = "Actions = "
             
+            //var theActionArray = [(action:Action, number: Int)]
+            let theActionArray = exportArray[i].arr
+            var strToWrite:(action:String,number:Int) = ("hello",0)
+            for i in theActionArray{
+    
+                switch (i.action){
+                case .LF:
+                    strToWrite = ("Left Flip",i.number)
+                case .RF:
+                    strToWrite = ("Right Flip",i.number)
+                case .LL:
+                    strToWrite = ("Left Leap",i.number)
+                case .RL:
+                    strToWrite = ("Right Leap",i.number)
+                case .S:
+                    strToWrite = ("Spin",i.number)
+                
+                }
+                
+                current = current + "Action = " + strToWrite.action + "Number = " + String(strToWrite.number)
+            }
 
-            let current:String = String(exportArray[i].arr) + String(exportArray[i].mystery)
+
+            current += "mystery = " + String(exportArray[i].mystery)
             
             writeString += current
         }
         
             NSLog("writeString: %@)", writeString)
         
-//            let handle = NSFileHandle(forWritingAtPath: self.dataFilePath())
-//        
-//            handle!.truncateFileAtOffset(handle!.seekToEndOfFile())
-//            handle!.writeData(writeString.dataUsingEncoding(NSUTF8StringEncoding)!)
-//            handle!.readDataToEndOfFile()
-//        
+     
         do {
             try writeString.writeToFile(dataFilePath(), atomically: true, encoding: NSUTF8StringEncoding)
 
@@ -68,34 +86,35 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         
         if( MFMailComposeViewController.canSendMail() ) {
             
-//            let mailComposer = MFMailComposeViewController()
-            var mailComposer = AppDelegate().mailViewController.sendMailTo([], subject: "uo", attachment: NSData(contentsOfFile: dataFilePath())!, body: "up", fromViewController: self)
+
+            var mailComposer = AppDelegate().mailViewController
             
-//            mailComposer.mailComposeDelegate = self
-//            
-//            //Set the subject and message of the email
-//            mailComposer.setSubject(subjectString)
-//            mailComposer.setMessageBody("", isHTML: true)
-//            
-//            
-//                let fileData = NSData(contentsOfFile: dataFilePath())
-////            
-//            mailComposer.addAttachmentData(fileData!, mimeType: "text/plain", fileName: "myfile.txt")
-//
-//            
-//            navigationController!.presentViewController(mailComposer, animated: true, completion: nil)
-//        }
+            mailComposer.sendMailTo([], subject: subjectString, attachment: NSData(contentsOfFile: dataFilePath())!, body: "This is an email from Carnegie Mellon Department of Psychology containing research data", fromViewController: self)
+    }
         
-        func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
-            controller.dismissViewControllerAnimated(true, completion: nil)
-            NSLog("%@", error)
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        if let aError = error {
+            print(aError)
+        }
+        
+        switch (result) {
+        case MFMailComposeResultCancelled:
+            break
+            
+        case MFMailComposeResultSaved:
+            break
+            
+        default: break
+        }
+        
+        
+        controller.dismissViewControllerAnimated(true) { () -> Void in
             
         }
-    
     }
-    
-    }
-    
     
     @IBOutlet weak var arrayLabel: UILabel!
     
@@ -125,9 +144,14 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
     
     var number:Int = 10
     
+    var n:Int = 21
+    
     //Checks that inputs are syntatically correct
     var lastButtonWasNumber:Bool = true
     
+    var mysterySelected:Bool = false
+    
+    //Will display in case of error
     var pandaArray = [
         UIImage(named: "panda1")!,
         UIImage(named: "panda2")!,
@@ -273,161 +297,247 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
     //if any of number button clicked, change var number
       @IBAction func didClickOne(sender: AnyObject) {
         if !lastButtonWasNumber {
-            actionsArray[actionsArray.count-1].number = 1
+            if !mysterySelected{
+                actionsArray[actionsArray.count-1].number = 1
+            }else{
+                n = 1
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
+
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickTwo(sender: AnyObject) {
-        if lastButtonWasNumber == false{
-            actionsArray[actionsArray.count-1].number = 2
+        if !lastButtonWasNumber {
+            if !mysterySelected{
+                actionsArray[actionsArray.count-1].number = 2
+        }else{
+            n = 2
+            doMysteryVal()
+                mysterySelected = false
+        }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickThree(sender: AnyObject) {
-        if lastButtonWasNumber == false{
-            actionsArray[actionsArray.count-1].number = 3
+        if !lastButtonWasNumber{
+            if !mysterySelected{
+                actionsArray[actionsArray.count-1].number = 3
+        }else{
+            n = 3
+            doMysteryVal()
+            mysterySelected = false
+        }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickFour(sender: AnyObject) {
         if (!lastButtonWasNumber) {
+            if !mysterySelected{
             actionsArray[actionsArray.count-1].number = 4
+            }else{
+                n = 4
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
 
     @IBAction func didClickFive(sender: AnyObject) {
-        if lastButtonWasNumber == false{
-            actionsArray[actionsArray.count-1].number = 5
+        if !lastButtonWasNumber{
+            if !mysterySelected{
+                actionsArray[actionsArray.count-1].number = 5
+            }else{
+                n = 5
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickSix(sender: AnyObject) {
-        if lastButtonWasNumber == false{
-            actionsArray[actionsArray.count-1].number = 6
+        if !lastButtonWasNumber{
+            if !mysterySelected{
+                actionsArray[actionsArray.count-1].number = 6
+            }else{
+                n = 6
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickSeven(sender: AnyObject) {
-        if lastButtonWasNumber == false{
+        if !lastButtonWasNumber{
+            if !mysterySelected{
             actionsArray[actionsArray.count-1].number = 7
+            }else{
+                n = 7
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickEight(sender: AnyObject) {
-        if lastButtonWasNumber == false{
+        if !lastButtonWasNumber{
+            if !mysterySelected{
             actionsArray[actionsArray.count-1].number = 8
+            }else{
+                n = 8
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     @IBAction func didClickNine(sender: AnyObject) {
-        if lastButtonWasNumber == false{
+        if !lastButtonWasNumber{
+            if !mysterySelected{
             actionsArray[actionsArray.count-1].number = 9
+            }else{
+                n = 9
+                doMysteryVal()
+                mysterySelected = false
+            }
+            audioPlayer.play()
         }
         lastButtonWasNumber = true
     }
     
     //if any action button clicked, change bool
     @IBAction func didClickLeftFlipButton(sender: AnyObject) {
+        if lastButtonWasNumber{
         actionsArray.append((.LF,0))
+        audioPlayer.play()
         lastButtonWasNumber = false
+        }
     }
     
     @IBAction func didClickRightFlipButton(sender: AnyObject) {
+        if lastButtonWasNumber{
+
         actionsArray.append((.RF,0))
+        audioPlayer.play()
         lastButtonWasNumber = false
+
+        }
     }
     
     @IBAction func didClickLeftLeapButton(sender: AnyObject) {
+        if lastButtonWasNumber{
         actionsArray.append((.LL,0))
+        audioPlayer.play()
         lastButtonWasNumber = false
+        }
     }
     
     @IBAction func didClickRightLeapButton(sender: AnyObject) {
+        if lastButtonWasNumber{
         actionsArray.append((.RL,0))
+        audioPlayer.play()
         lastButtonWasNumber = false
+    }
     }
 
 
     @IBAction func didClickSpinButton(sender: AnyObject) {
-        actionsArray.append((.S,0))
+        if lastButtonWasNumber{
+            actionsArray.append((.S,0))
+        audioPlayer.play()
         lastButtonWasNumber = false
+    }
     }
 
     
     //switch determines mystery function
     @IBAction func didClickMysteryButton(sender: AnyObject) {
-        
+        if lastButtonWasNumber{
+        audioPlayer.play()
         mysteryNum += 1
-        
-        if mysteryNum == 1{
-        exportArray.append((actionsArray,0))
-        }
-        
-        
+                //handles logical exception - cannot select number after this button
+        lastButtonWasNumber = false
+        mysterySelected = true
+    }
+    }
+    
+    
+    func doMysteryVal(){
         switch experimentRecieved{
-            
-            //play animation twice
-            case 1:
-                actionsArray += actionsArray
-            
-            //play each element 3 times denoted ie axyz --> aaaxxxyyyzzz
-            case 2:
-                for (_, var repeats) in actionsArray{
-                    repeats = repeats*3
+        //Repeat the immediately prior step N times.
+        case 1:
+            if actionsArray.count > 0{
+                var lastNumber = actionsArray.last!.number
+                lastNumber = lastNumber * n
+                actionsArray[actionsArray.count - 1].number = lastNumber
             }
             
-            //play the second to last element twice indicated ie axyz --> axyyz
-            case 3:
-                if actionsArray.count > 2{
-                    actionsArray[actionsArray.count - 2].number = actionsArray[actionsArray.count - 2].number * 2
+        //Repeat the entire prior program, N times.
+        case 2:
+            let tempArray = actionsArray
+            if n != 1{
+                for _ in 2...n{
+                    actionsArray += tempArray
+                }
             }
             
-            //play the second element twice the indicated ie axyz --> axxyz
-            case 4:
-                if actionsArray.count > 2 {
-                    actionsArray[1].number = actionsArray[1].number * 2
+        //Repeat the most recent N steps once.
+        case 3:
+            if actionsArray.count >= n{
+                for x in 1...n{
+                    actionsArray[actionsArray.count-x].number += actionsArray[actionsArray.count - x].number
+                }
             }
             
-            //play each element 3 times denoted ie axyz --> aaxxyyzz
-            case 5:
-                for (_, var repeats) in actionsArray{
-                    repeats = repeats*2
+        //Repeat the first N steps once.
+        case 4:
+            if actionsArray.count >= n{
+                for x in 1...n{
+                    actionsArray[x].number += actionsArray[x].number
+                }
             }
+            
+        //Repeat the Nth step from the start of the program once.
+        case 5:
+            if actionsArray.count >= n{
+                actionsArray[n].number += actionsArray[n].number
+            }
+            
+        //Repeat the Nth step from the end of the program once.
+        case 6:
+            if actionsArray.count >= n{
+                actionsArray[actionsArray.count - n].number += actionsArray[actionsArray.count - n].number
+            }
+            
         default:
             animationView.image = UIImage(named: "White")
             
         }
-
-        //handles logical exception - cannot select number after this button
-        lastButtonWasNumber = true
+        
     }
-    
 
     //execute animation
     @IBAction func didClickGo(sender: AnyObject) {
         if lastButtonWasNumber{
         audioPlayer.play()
-        
-        
-        /* If mysteryNum is greater than zero, then user has clicked mystery num. If user has clicked mysteryNum
-            then actionsArray was already appended to exportArray. Now add the corresponding mysteryNum
-            This allows the user to click mystery multiple times.
-            */
-        if mysteryNum > 0 {
-            exportArray[exportArray.count - 1].mystery = mysteryNum
-        }else{
-            //In the case that mysteryNum is 0, append mysteryNum
-            exportArray.append((actionsArray,0))
-        }
-        
+        exportArray.append((actionsArray,mysteryNum))
         //Reset mysteryNum
         mysteryNum = 0
         
@@ -442,10 +552,8 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         animateLabel();
         actionsArray = []
 
-        
-        
         //handles logical exception - sequence must begin with action
-        lastButtonWasNumber = false
+        lastButtonWasNumber = true
         }
     }
     
