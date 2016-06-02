@@ -546,10 +546,10 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
             if number != 0{
             for _ in 1...number {
             playActionArray.append(action)
-            }
+                }
             }
         }
-        animateLabel();
+        animateLabel()
         actionsArray = []
 
         //handles logical exception - sequence must begin with action
@@ -568,7 +568,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         //initialize currentAction to the first element in playActionArray
         let currentAction:Action = playActionArray.first!
         
-        
         //Change the currentActionArray to the correct one based on the action that is denoted in playActionArray
         switch currentAction{
         case .LF:
@@ -583,178 +582,24 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
             currentActionArray = spinArray
         }
         
-        
-        //Play animation from playActionArray
-        //currentActionArray contains the array of the animation sequence that is currently playing
-        //Recursively calls animateLabel() until playActionArray is empty
-        
-        UIView.transitionWithView(animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-            self.animationView.image = self.currentActionArray[0]
-            }) { (completion) -> Void in
-                
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[1]
-                    }) { (completion) -> Void in
-                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[2]
-                    }) { (completion) -> Void in
-                                
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[3]
-                    }) { (completion) -> Void in
-                                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[4]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[5]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[6]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[7]
-                    }) { (completion) -> Void in
-                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[8]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[9]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                   self.animationView.image = self.currentActionArray[10]
-                   }) { (completion) -> Void in
-                   
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[11]
-                    }) { (completion) -> Void in
-                        if self.currentActionArray.count > 12{
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[12]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[13]
-                    }) { (completion) -> Void in
-                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[14]
-                    }) { (completion) -> Void in
-                        if self.currentActionArray.count > 15{
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[15]
-                    }) { (completion) -> Void in
-                
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[16]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[17]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[18]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[19]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[20]
-                    }) { (completion) -> Void in
-                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[21]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[22]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[23]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[24]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[25]
-                    }) { (completion) -> Void in
-                        
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[26]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[27]
-                    }) { (completion) -> Void in
-                    
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[28]
-                    }) { (completion) -> Void in
-            
-            UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                    self.animationView.image = self.currentActionArray[29]
-                    }) { (completion) -> Void in
-                            self.animationView.image = self.currentActionArray[30]
-                        self.playActionArray.removeFirst()
-                        self.animateLabel()
-                        }}
-                        
-                        
-                                                                                        }
-                                                                                }
-                                                                        }
-                                                                }
-                                                        }
-                                                }
-                                        }
-                                }
-                        }
-                                                                        }
-                                                                }
-                                                        }
-                                                }
-                        }else{
-                            self.playActionArray.removeFirst()
-                            self.animateLabel()
-                        }
-                                }
-                        }
-                                                                                                                }
-                        }else{
-                            self.playActionArray.removeFirst()
-                            self.animateLabel()
-                        }
-                                                                                                }
-                                                                                        }
-                                                                                }
-                                                                        }
-                                                                }
-                                                        }
-                                                }
-                                        }
-                                }
-                        }
-                }
-                
-
-            
-        }
+        _ = self.animateAction(currentActionArray)
+        self.playActionArray.removeFirst()
+        print(playActionArray)
+        _ = animateLabel()
         
     }
     
+    
+    func animateAction(action:[UIImage], i:Int = 0){
+        UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations:
+            { () -> Void in self.animationView.image = action[i]
+        }) { (completion) -> Void in
+            if i < action.count-1{
+                self.animateAction(action,i:i+1)
+            }
+        }}
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Background")!)
