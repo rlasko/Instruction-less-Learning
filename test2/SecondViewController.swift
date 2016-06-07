@@ -59,20 +59,15 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                     strToWrite = ("Right Leap",i.number)
                 case .S:
                     strToWrite = ("Spin",i.number)
-                
                 }
-                
                 current = current + "Action = " + strToWrite.action + "Number = " + String(strToWrite.number)
             }
 
-
             current += "mystery = " + String(exportArray[i].mystery)
-            
             writeString += current
         }
         
             NSLog("writeString: %@)", writeString)
-        
      
         do {
             try writeString.writeToFile(dataFilePath(), atomically: true, encoding: NSUTF8StringEncoding)
@@ -80,18 +75,14 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         } catch {
             print((error as NSError).description)
         }
-
             
        //send email
         
         if( MFMailComposeViewController.canSendMail() ) {
-            
-
             var mailComposer = AppDelegate().mailViewController
             
             mailComposer.sendMailTo([], subject: subjectString, attachment: NSData(contentsOfFile: dataFilePath())!, body: "This is an email from Carnegie Mellon Department of Psychology containing research data", fromViewController: self)
-    }
-        
+        }
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
@@ -109,10 +100,7 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
             
         default: break
         }
-        
-        
         controller.dismissViewControllerAnimated(true) { () -> Void in
-            
         }
     }
     
@@ -278,6 +266,7 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         UIImage(named: "10")!,
         UIImage(named: "11")!
     ]
+    
     
     var approveSound =  NSBundle.mainBundle().URLForResource("beep", withExtension: "mp3")!
     var audioPlayer = AVAudioPlayer()
@@ -457,7 +446,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
     }
     }
 
-
     @IBAction func didClickSpinButton(sender: AnyObject) {
         if lastButtonWasNumber{
             actionsArray.append((.S,0))
@@ -465,7 +453,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         lastButtonWasNumber = false
     }
     }
-
     
     //switch determines mystery function
     @IBAction func didClickMysteryButton(sender: AnyObject) {
@@ -477,8 +464,7 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         mysterySelected = true
     }
     }
-    
-    
+
     func doMysteryVal(){
         switch experimentRecieved{
         //Repeat the immediately prior step N times.
@@ -488,7 +474,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                 lastNumber = lastNumber * n
                 actionsArray[actionsArray.count - 1].number = lastNumber
             }
-            
         //Repeat the entire prior program, N times.
         case 2:
             let tempArray = actionsArray
@@ -497,7 +482,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                     actionsArray += tempArray
                 }
             }
-            
         //Repeat the most recent N steps once.
         case 3:
             if actionsArray.count >= n{
@@ -505,7 +489,6 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                     actionsArray[actionsArray.count-x].number += actionsArray[actionsArray.count - x].number
                 }
             }
-            
         //Repeat the first N steps once.
         case 4:
             if actionsArray.count >= n{
@@ -513,22 +496,18 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                     actionsArray[x].number += actionsArray[x].number
                 }
             }
-            
         //Repeat the Nth step from the start of the program once.
         case 5:
             if actionsArray.count >= n{
                 actionsArray[n].number += actionsArray[n].number
             }
-            
         //Repeat the Nth step from the end of the program once.
         case 6:
             if actionsArray.count >= n{
                 actionsArray[actionsArray.count - n].number += actionsArray[actionsArray.count - n].number
             }
-            
         default:
             animationView.image = UIImage(named: "White")
-            
         }
         
     }
@@ -549,57 +528,51 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
                 }
             }
         }
-        animateLabel()
+            
+            var finalArray:[UIImage] = []
+            for action in playActionArray{
+                switch action{
+                case .LF:
+                    finalArray += leftFlipArray
+                case .RF:
+                    finalArray += rightFlipArray
+                case .LL:
+                    finalArray += leftLeapArray
+                case .RL:
+                    finalArray += rightLeapArray
+                case .S:
+                    finalArray += spinArray
+                }
+            }
         actionsArray = []
+        if finalArray.count > 0{self.animateAction(finalArray)}
+        playActionArray = []
 
         //handles logical exception - sequence must begin with action
         lastButtonWasNumber = true
         }
     }
     
-    
-    func animateLabel() {
-        
-        //When playActionArray is empty, stop the recursive calls
-        guard !playActionArray.isEmpty else {
-            return
-        }
-        
-        //initialize currentAction to the first element in playActionArray
-        let currentAction:Action = playActionArray.first!
-        
-        //Change the currentActionArray to the correct one based on the action that is denoted in playActionArray
-        switch currentAction{
-        case .LF:
-            currentActionArray = leftFlipArray
-        case .RF:
-            currentActionArray = rightFlipArray
-        case .LL:
-            currentActionArray = leftLeapArray
-        case .RL:
-            currentActionArray = rightLeapArray
-        case .S:
-            currentActionArray = spinArray
-        }
-        
-        _ = self.animateAction(currentActionArray)
-        self.playActionArray.removeFirst()
-        print(playActionArray)
-        _ = animateLabel()
-        
-    }
-    
-    
-    func animateAction(action:[UIImage], i:Int = 0){
-        UIView.transitionWithView(self.animationView, duration: 0.06, options: UIViewAnimationOptions.TransitionCrossDissolve, animations:
+    func animateAction(action:[UIImage], i:Int = 0, dur:Double = 0.12){
+        UIView.transitionWithView(self.animationView, duration: dur, options: UIViewAnimationOptions.TransitionCrossDissolve, animations:
             { () -> Void in self.animationView.image = action[i]
         }) { (completion) -> Void in
             if i < action.count-1{
                 self.animateAction(action,i:i+1)
             }
-        }}
+        }
+    }
     
-
+    func loadImage(image:[UIImage], i:Int = 0){
+        UIView.animateWithDuration(0, animations: { () -> Void in self.animationView.image = image[i]})
+        {(completion) -> Void in
+            if i < image.count-1{
+                self.loadImage(image, i:i+1)
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Background")!)
@@ -608,16 +581,12 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         try! audioPlayer = AVAudioPlayer(contentsOfURL: approveSound, fileTypeHint: nil)
         audioPlayer.prepareToPlay()
         
-        
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -628,6 +597,5 @@ class SecondViewController: UIViewController, MFMailComposeViewControllerDelegat
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
