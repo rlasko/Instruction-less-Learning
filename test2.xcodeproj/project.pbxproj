@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52319CEB1C45D63700CD4810 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 52319CEA1C45D63700CD4810 /* beep.mp3 */; };
 		52D990C51BDACF990024687C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990C41BDACF990024687C /* AppDelegate.swift */; };
 		52D990C71BDACF990024687C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990C61BDACF990024687C /* ViewController.swift */; };
 		52D990CA1BDACF990024687C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D990C81BDACF990024687C /* Main.storyboard */; };
@@ -14,7 +15,7 @@
 		52D990CF1BDACF990024687C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52D990CD1BDACF990024687C /* LaunchScreen.storyboard */; };
 		52D990DA1BDACF990024687C /* test2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990D91BDACF990024687C /* test2Tests.swift */; };
 		52D990E51BDACF990024687C /* test2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990E41BDACF990024687C /* test2UITests.swift */; };
-		52D990FB1BE0A5300024687C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990FA1BE0A5300024687C /* SecondViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		52D990FB1BE0A5300024687C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D990FA1BE0A5300024687C /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52319CEA1C45D63700CD4810 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = beep.mp3; path = Assets.xcassets/beep.dataset/beep.mp3; sourceTree = "<group>"; };
 		52D990C11BDACF990024687C /* test2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D990C41BDACF990024687C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52D990C61BDACF990024687C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				52D990FA1BE0A5300024687C /* SecondViewController.swift */,
 				52D990CB1BDACF990024687C /* Assets.xcassets */,
 				52D990CD1BDACF990024687C /* LaunchScreen.storyboard */,
+				52319CEA1C45D63700CD4810 /* beep.mp3 */,
 				52D990D01BDACF990024687C /* Info.plist */,
 			);
 			path = test2;
@@ -195,6 +198,7 @@
 				TargetAttributes = {
 					52D990C01BDACF990024687C = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = UGUNRYBRQZ;
 					};
 					52D990D41BDACF990024687C = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -233,6 +237,7 @@
 			files = (
 				52D990CF1BDACF990024687C /* LaunchScreen.storyboard in Resources */,
 				52D990CC1BDACF990024687C /* Assets.xcassets in Resources */,
+				52319CEB1C45D63700CD4810 /* beep.mp3 in Resources */,
 				52D990CA1BDACF990024687C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,10 +407,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = test2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rlasko.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -413,10 +421,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = test2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rlasko.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
